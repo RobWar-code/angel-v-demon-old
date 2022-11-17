@@ -31,9 +31,9 @@
 	The player chooses the difficulty level (time to view story (seconds per 
 	sentence))
 
-	The player chooses how many sentences to try, (3 to 12)
+	The player chooses how many paragraphs to try, (1 to 5)
 
-	The game consists of a short story (instructions) of three to twelve sentences 
+	The game consists of a short story (instructions) of one to five paragraphs,
 	which is presented to the user on the terminal console for a time to allow the 
 	user to have a chance to memorise them.
 
@@ -128,11 +128,15 @@
    |  |  |
    |  |  O-----<-----print fairy message
    |  |  |
-   |  |  |        print knight doomed message
+   |  |  |         print knight doomed message (ill_consequence)
    |  |  |
-   |  o-----------prompt input repeat the same game
+   |  o------------prompt input repeat the same game
    |     |
-   O-----------<--prompt input another game
+   O-----------<---prompt input another game
+   |     |
+   |     |      Check whether last sentence of the paragraph
+   |     |				 
+   |     |         display the good consequence of this sentence gratis
    |     |
    |     o-----<if not end of story/instructions
    |
@@ -180,18 +184,73 @@
 		The giant fell dead.
 
 	The sentences used are recorded and the words chosen by the 
-	demon and the angel are flagged
+	demon and the angel are recorded.
 
-	The template sentence objects have the following structure:
+	The typical sequence is as follows
+		The knight walked left.
+		A giant was in the room.
+		The knight struck the giant with a red sword
+		The giant fell dead
+			or
+		The giant killed the knight
 
-		template_sentences [
-			{
-				template: "words .. ? .. ?"
-				alternatives: [
-					[string, ...],
-					...
-				]
-			},
+	If the player got the third sentence wrong, then the monster in the fourth 
+	is the demon's choice.
+
+	We note that the sentences are grouped into paragraphs in order to get 
+	a satisfactory sense of completion.
+
+	Since the player can get any sentence wrong, so each should have an
+	ill_consequence.
+
+	The final sentence of the paragraph should be given to the player gratis, 
+	since it is a natural termination 
+
+	Since some subsequent sentences in a paragraph must include the SAME 
+	alternative word, we need an id for some words
+
+	The template paragraphs objects therefore have the following structure:
+
+		template_paragraphs [
+			[
+				{ # First Sentence
+
+					main_sentence: {
+						template: "words .. ? .. ?"
+						alternatives: [ 
+							{	
+								definitive_id: # string "" if n/a
+								acquired_id: # string "" if n/a
+								opts: [string, ...]
+							}
+							...
+						]
+					},
+					ill_consequence: {
+					# template as above
+					}
+				},
+				...,
+				{ # Final Sentence
+					main_sentence: {
+						template: "words .. ? .. ?"
+						alternatives: [ 
+							{	
+								definitive_id: # string "" if n/a
+								acquired_id: # string "" if n/a
+								opts: [string, ...]
+							}
+							...
+						]
+					},
+					good_consequence: {
+
+					}
+					ill_consequence: {
+
+					}
+				}
+			],
 			...
 		]
 
@@ -201,21 +260,24 @@
 
 	The other sentences are chosen at random from the templates, so the story data
 	consists of:
-
-		story_sentences [
-			{
-				template_sentences_index: integer
-				alternatives [
-					{
-						opt_word_num: integer
-						angel_choice: string
-						demon_choice: string
-					},
-					...
-				]
-			},
-			...
-		]
+		story_data {
+			story_sentences [
+				{
+					template_paragraph_index: integer
+					template_sentence_index: integer
+					consequence_type: # "none", "ill" or "good"
+					alternatives [
+						{
+							opt_word_num: integer # The nth optional word in the sentence
+							angel_choice: string
+							demon_choice: string
+						},
+						...
+					]
+				},
+				...
+			]
+		}
 
 ### Story Classes
 
@@ -238,23 +300,27 @@
 
 	This code will reside in a separate file story_template.py
 
-	The story_handler inherits the template handler, since most of the methods operate
+	The StoryHandler inherits the template handler, since most of the methods operate
 	on the templates.
 
 	TemplateHandler properties:
 		template_sentences
+		token_list
 
 	TemplateHandler methods:
+		clear()
 		num_template_sentences()
-		get_sentence_data(template_sentence_num)
-		get_sentence_text(template_sentence_num, [opt_sentence_data])
+		get_sentence_data(template_para_num, template_sentence_num)
+		get_sentence_text(template_para_num, template_sentence_num, [opt_sentence_data])
 
 	StoryHandler properties:
+		story_set - whether a story has been created
 		story_sentences
 		current_sentence
 		num_story_sentences
 
 	StoryHandler methods:
+		clear()
 		create_story(num_sentences) - this generates the story data from the templates
 			super().num_template_sentences()
 			super().get_sentence_data(template_sentence_num)
