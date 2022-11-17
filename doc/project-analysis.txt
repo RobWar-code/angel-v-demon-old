@@ -1,0 +1,275 @@
+# Project Analysis - Angel v Demon
+
+## Contents
+	Introduction
+	Intended Audience
+	Outline of the Game
+		Additional Options
+	Scope
+	Logic Analysis
+		Create Story Data
+		Story Classes
+	Coding Strategy
+
+## Introduction
+	The Angel v Demon project is a python command-line game proposed as a solution
+	to the CI Portfolio 3 Project - Full Stack Development.
+
+## Intended Audience
+	For any computer games player who would like a memory game with a touch of
+	adventure and who access to the Python run-time environment.
+
+## Outline of the Game 
+	Play begins with a brief explanation of the game on the console as follows:
+
+	angel-v-demon is a memory game in which a set of commands is given to a
+	knight by an angel to guide him to success through a maze. Unfortunately,
+	a demon gets hold of the instructions and modifies one or two words in
+	each instruction, to lead the knight to his doom. The player is the angel
+	restoring the correct words to the instructions/story.
+
+	The player chooses the difficulty level (time to view story (seconds per 
+	sentence))
+
+	The player chooses how many sentences to try, (3 to 12)
+
+	The game consists of a short story (instructions) of three to twelve sentences 
+	which is presented to the user on the terminal console for a time to allow the 
+	user to have a chance to memorise them.
+
+	After the given time, the story is cleared from the console (either by printing
+	blank lines or by using python system call os.system(cls) or os.system(clear)).
+	Followed by one sentence at a time being presented to the user. In this case,
+	the sentences have been modified (by the demon). The player enters two words (on 
+	one input line), the first being the word to replace, the second its replacement.
+	If there are two words to be replaced, the player is prompted again.
+
+	Once the one or two words for the sentence have been supplied by the user, the
+	computer checks the sentence against the original, and if it leads to a doomed
+	situation, the computer displays the story to this point, presents the doom and
+	then asks the player if he/she would like to start again.
+
+	Otherwise, subsequent sentences are presented until the player completes the
+	story. Then the computer prints a congratulatory message and offers the choice
+	of playing another game.
+
+	To keep each game different, a set of sentence templates is used to generate
+	the original story.
+
+### Additional Options
+	A time limit to reply on each sentence would make the game additionally
+	challenging
+
+	Alternative winning "routes" are a possibility.
+
+	Choices with hints are a possibility
+
+## Scope
+	It is currently estimated that 3 man weeks are available for analysis
+	and development.
+
+	Tasks 										half-days
+    Data and Logic Analysis and Modelling		8
+	Coding										8
+	Systems Testing								4
+	Readme										4
+	TOTAL										24
+
+	Schedule						Completion		Actual
+	Data and Logic Analysis			20/11/22
+	External Work					26/11/22
+	Coding							30/11/22
+	Systems Testing					02/12/22
+	Readme							04/12/22
+	Submission						08/01/23
+
+## Logic Analysis
+
+               START
+
+			Declare the story object (global)
+
+   o---------->print introduction/instructions - game_loop()
+   |
+   |        o->input difficulty level (calculate time for display, max score and no. fairies) 
+   |        |
+   |        |  check for quit -->
+   |        |
+   |        o-<if invalid
+   |    
+   |        o-->input number of sentences
+   |        |
+   |        |  check for quit -->
+   |        |
+   |        o-<if invalid
+   |    
+   |           Create story (see below), clear old story if present
+   |
+   |  o------->Print story (and sleep given time) - repeat_story_loop()
+   ^  |
+  /|\ |  o---->present demon's sentence/instruction - sentence_loop()
+   |  |  |
+   |  |  |  o->prompt/input for replacement word(s) - (upto 3 words) ie: sword=club -
+   |  |  |  |  word_input_loop()
+   |  |  |  |
+   |  |  |  |  check for quit -->
+   |  ^  |  |
+   | /|\ |  |  check for word not found (left of =) or garbage
+   |  |  |  |	
+   |  |  |  O--<---print word not found message
+   |  |  |  |
+   |  |  |  |  check whether the replaced words match the original (angel version)
+   |  |  |  |
+   |  |  |  |  if not correct
+   |  |  |  |
+   |  |  |  |     if a fairy intervenes
+   |  |  |  |
+   |  |  |  o--<-----50/50 chance of the fairy offering another try, otherwise proceed
+   |  |  |
+   |  |  O-----<-----print fairy message
+   |  |  |
+   |  |  |        print knight doomed message
+   |  |  |
+   |  o-----------prompt input repeat the same game
+   |     |
+   O-----------<--prompt input another game
+   |     |
+   |     o-----<if not end of story/instructions
+   |
+   |            display success message
+   |
+   o-----------<prompt input for play again
+
+	Coding Notes
+
+	Because there are more than two levels of nested loops, the code should be split into
+	functions with nested calls:
+
+	game_loop
+		repeat_game_loop
+			sentence_loop
+				word_input_loop						
+
+### Create Story - Data
+
+	The data consists of sentence templates and sets of alternative words
+	to be placed within the sentence, ie:
+
+		The knight went ?.
+
+		In which the alternatives are "left", "forward", "right".
+
+		In the room was a ? ?, the knight ? it with a ? ?."
+
+		In which the alternatives might be:
+			"orange", "green", "black", "white"
+			"giant", "leprechaun", "dragon"
+			"attacked", "struck", "hit"
+			"red", "blue", "purple", "silver"
+			"sword", "club", "dagger"
+
+		In the room was a ? ? the knight drank from it.
+
+		In which the alternatives might be:
+			"silver", "clear", "green", "purple"
+			"flask", "bottle", "glass"
+
+	Note that two words the same should not appear in any sentence
+
+	Sentences may be followed by a consequence sentence, in response to the above:
+		The giant fell dead.
+
+	The sentences used are recorded and the words chosen by the 
+	demon and the angel are flagged
+
+	The template sentence objects have the following structure:
+
+		template_sentences [
+			{
+				template: "words .. ? .. ?"
+				alternatives: [
+					[string, ...],
+					...
+				]
+			},
+			...
+		]
+
+	The first sentence (index = 0) is always as below and this 
+	alternates with the other sentences through the story.
+		"The knight went ?."
+
+	The other sentences are chosen at random from the templates, so the story data
+	consists of:
+
+		story_sentences [
+			{
+				template_sentences_index: integer
+				alternatives [
+					{
+						opt_word_num: integer
+						angel_choice: string
+						demon_choice: string
+					},
+					...
+				]
+			},
+			...
+		]
+
+### Story Classes
+
+	The story and the sentence_templates are natural candidates for one or two classes.
+
+	The sentence_templates are constant data and if we separate the story data into
+	its own class, then we will need to pass derivative data from the story class
+	to the sentence_templates class as function arguments.
+
+	In python we cannot define dictionaries within the class, but we can assign dictionaries
+	to a class variable via a method call.
+
+	The conclusion is that we will have two dictionaries:
+		template_sentences
+		story_sentences
+
+	And that a class will be provided for methods for each
+		TemplateHandler
+		StoryHandler
+
+	This code will reside in a separate file story_template.py
+
+	The story_handler inherits the template handler, since most of the methods operate
+	on the templates.
+
+	TemplateHandler properties:
+		template_sentences
+
+	TemplateHandler methods:
+		num_template_sentences()
+		get_sentence_data(template_sentence_num)
+		get_sentence_text(template_sentence_num, [opt_sentence_data])
+
+	StoryHandler properties:
+		story_sentences
+		current_sentence
+		num_story_sentences
+
+	StoryHandler methods:
+		create_story(num_sentences) - this generates the story data from the templates
+			super().num_template_sentences()
+			super().get_sentence_data(template_sentence_num)
+		set_story_sentence(story_sentence_num)
+		test_angel_substitutes(string of x=y ..)
+		print_story_text()
+			super().get_sentence_text()
+		get_sentence_text(story_sentence_num, is_angel)
+		get_current_sentence_text(template_sentence_num, [opt_sentence_data])
+
+## Coding Strategy
+
+	It is best to begin with the template class, because this can be spot tested in
+	small sections and does not depend on other code.
+
+	Then proceed to the story class and spot test each method.
+
+	The main process can then be coded and tested in order.
