@@ -1,0 +1,14 @@
+Contents
+    Work Due
+    Work Done
+
+Work Due
+    Code Sentence Template Data
+
+    Write and Test Template Class methods
+
+    Code and Test Sentence Text Class methods 
+
+    Write and Test the main interactive loops functions
+
+Work Done

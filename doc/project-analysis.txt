@@ -207,7 +207,9 @@
 	since it is a natural termination 
 
 	Since some subsequent sentences in a paragraph must include the SAME 
-	alternative word, we need an id for some words
+	alternative word, we need an id for some words. This needs to be both
+	the demon's version and the angel's version. We can use a temporary
+	token_list to record these id's.
 
 	The template paragraphs objects therefore have the following structure:
 
@@ -254,30 +256,29 @@
 			...
 		]
 
-	The first sentence (index = 0) is always as below and this 
-	alternates with the other sentences through the story.
-		"The knight went ?."
+
+	The paragraph is selected at random from the set of paragraphs in the
+	template data and the sentences built in sequence within that. We
+	build both the main sentence and the consequences at this point.
+
+	In order to check that the player's chosen words match the angel's version,
+	we need only check for their presence in the sentence, since all the words
+	are unique within the sentence. This means we only need to record the
+	text versions of the sentences in the story data.
 
 	The other sentences are chosen at random from the templates, so the story data
 	consists of:
-		story_data {
-			story_sentences [
-				{
-					template_paragraph_index: integer
-					template_sentence_index: integer
-					consequence_type: # "none", "ill" or "good"
-					alternatives [
-						{
-							opt_word_num: integer # The nth optional word in the sentence
-							angel_choice: string
-							demon_choice: string
-						},
-						...
-					]
-				},
-				...
-			]
-		}
+		story_sentences [
+			{
+				template_paragraph_index: integer
+				template_sentence_index: integer
+				main_sentence_angel: string
+				main_sentence_demon: string
+				ill_consequence: string
+				good_consequence: string
+			},
+			...
+		]
 
 ### Story Classes
 
@@ -304,18 +305,17 @@
 	on the templates.
 
 	TemplateHandler properties:
-		template_sentences
+		template_sentences - dictionary
 		token_list
 
 	TemplateHandler methods:
 		clear()
 		num_template_sentences()
-		get_sentence_data(template_para_num, template_sentence_num)
-		get_sentence_text(template_para_num, template_sentence_num, [opt_sentence_data])
+		get_sentence_texts(template_para_num, template_sentence_num)
 
 	StoryHandler properties:
 		story_set - whether a story has been created
-		story_sentences
+		story_sentences - dictionary
 		current_sentence
 		num_story_sentences
 
@@ -323,13 +323,11 @@
 		clear()
 		create_story(num_sentences) - this generates the story data from the templates
 			super().num_template_sentences()
-			super().get_sentence_data(template_sentence_num)
+			super().get_sentence_texts(template_sentence_num)
 		set_story_sentence(story_sentence_num)
 		test_angel_substitutes(string of x=y ..)
 		print_story_text()
-			super().get_sentence_text()
 		get_sentence_text(story_sentence_num, is_angel)
-		get_current_sentence_text(template_sentence_num, [opt_sentence_data])
 
 ## Coding Strategy
 
