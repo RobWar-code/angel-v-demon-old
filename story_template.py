@@ -21,11 +21,55 @@ class TemplateHandler:
     def get_num_paragraphs(self):
         return len(self.template_paragraphs)
 
+    """
+        Collect the angel and demon versions of a sentence as well as
+        the good and ill consequence sentences
+    """
     def get_sentence_texts(self, paragraph_num, sentence_num):
         # Get the angel's and demon's versions of the main sentence
         dual_text = self._get_angel_and_demon_text(paragraph_num, sentence_num)
-        print(dual_text)
+        sentence_data = self.template_paragraphs[paragraph_num][sentence_num]
+        ill_consequence = ""
+        if (sentence_data["ill_consequence"]):
+            ill_consequence = self._get_single_sentence_text(
+                sentence_data["ill_consequence"], False)
+        good_consequence = ""
+        if (sentence_data["good_consequence"]):
+            good_consequence = self._get_single_sentence_text(
+                sentence_data["good_consequence"], True)
+            # This is the final sentence of the paragraph, so clear tokens
+            self.clear()
 
+        return {
+            "angel_text": dual_text[0],
+            "demon_text": dual_text[1],
+            "ill_consequence": ill_consequence,
+            "good_consequence": good_consequence
+        }
+
+    """
+        Perform the word substitutions for either the demon or the angel
+    """
+    def _get_single_sentence_text(self, sentence_data, is_angel):
+        out_text = sentence_data["template"]
+        alternatives = sentence_data["alternatives"]
+        # Perform each substitution
+        for alt in alternatives:
+            word = ""
+            # Check whether a token
+            if alt["acquired_id"]:
+                word = self._get_token(alt["acquired_id"], is_angel)
+            else:
+                word = random.choice(alt["options"])
+            # Insert the word
+            out_text = out_text.replace("?", word, 1)
+
+        return out_text
+
+    """
+        Perform the word substitutions for both angel and demon to
+        produce two sentences
+    """
     def _get_angel_and_demon_text(self, paragraph_num, sentence_num):
         angel_text = ""
         demon_text = ""
@@ -72,17 +116,25 @@ class TemplateHandler:
 
         return [angel_text, demon_text]
 
+    """
+        Insert a token into the token list. This contains both the
+        angel's and the demon's values
+    """
     def _set_token(self, token_name, values):
         token_obj = [token_name, values[0], values[1]]
         self.token_list.append(token_obj)
 
+    """
+        Search and get the token (angel or demon value) from the token
+        list
+    """
     def _get_token(self, token_name, is_angel):
         for token in self.token_list:
             if token[0] == token_name:
                 return token[1] if is_angel else token[2]
         # If token not found, then this is an error
         print(f"_get_token: token not found: {token_name}")
-        raise systemExit()
+        raise SystemExit()
 
     """
         Get list of template word replacement numbers that are
@@ -102,6 +154,7 @@ class TemplateHandler:
         return num_list
 
 
+# --------------------------------------------------------------------
 # Template Data
 template_paragraphs = [
     [
@@ -235,3 +288,5 @@ template_paragraphs = [
         },
     ]
 ]
+
+# class StoryHandler(TemplateHandler, max_differences_per_sentence):

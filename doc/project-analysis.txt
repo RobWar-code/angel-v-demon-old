@@ -262,9 +262,9 @@
 	build both the main sentence and the consequences at this point.
 
 	In order to check that the player's chosen words match the angel's version,
-	we need only check for their presence in the sentence, since all the words
-	are unique within the sentence. This means we only need to record the
-	text versions of the sentences in the story data.
+	we need only check for their presence in the right position in the sentence, 
+	since all the words are unique within the sentence. This means we only need to 
+	record the text versions of the sentences in the story data.
 
 	The other sentences are chosen at random from the templates, so the story data
 	consists of:
@@ -272,8 +272,8 @@
 			{
 				template_paragraph_index: integer
 				template_sentence_index: integer
-				main_sentence_angel: string
-				main_sentence_demon: string
+				angel_text: string
+				demon_text: string
 				ill_consequence: string
 				good_consequence: string
 			},
@@ -321,7 +321,7 @@
 
 	StoryHandler methods:
 		clear()
-		create_story(num_sentences) - this generates the story data from the templates
+		create_story(num_paragraphs) - this generates the story data from the templates
 			super().num_template_sentences()
 			super().get_sentence_texts(template_sentence_num)
 		set_story_sentence(story_sentence_num)
