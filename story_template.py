@@ -81,7 +81,6 @@ class TemplateHandler:
         # different
         word_diff_list = []
         word_diff_list = self._get_word_diff_list(sentence_data["template"])
-        print(word_diff_list)
         # For each alternative word option
         count = 0
         diff_count = 0
@@ -289,4 +288,44 @@ template_paragraphs = [
     ]
 ]
 
-# class StoryHandler(TemplateHandler, max_differences_per_sentence):
+
+# -------------------------------------------------------------------------
+class StoryHandler(TemplateHandler):
+    """
+        Assign the initial data
+    """
+    def __init__(self, template_paragraphs, num_paragraphs,
+                 max_differences_per_sentence, story_sentences):
+        # Set-up the template object
+        super().__init__(template_paragraphs,
+                         max_differences_per_sentence)
+        self.num_paragraphs = num_paragraphs
+        self.story_sentences = story_sentences
+        self.story_created = False
+
+    def _clear(self):
+        self.story_sentences = []
+
+    def create_story(self):
+        # Get the list of template paragraph numbers to use
+        num_template_paras = super().get_num_paragraphs()
+        para_list = []
+        for i in range(self.num_paragraphs):
+            para_list.append(random.randint(0, num_template_paras - 1))
+        # Get the paragraphs and build the story data
+        for para_num in para_list:
+            para_finished = False
+            sentence_num = 0
+            while not para_finished:
+                sentence_data = {}
+                sentence_data = super().get_sentence_texts(
+                    para_num, sentence_num)
+                self.story_sentences.append(sentence_data)
+                if sentence_data["good_consequence"]:
+                    para_finished = True
+                sentence_num += 1
+        print(story_sentences)
+
+
+# ------------------------------------------------------------------------
+story_sentences = []

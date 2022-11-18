@@ -292,7 +292,7 @@
 	to a class variable via a method call.
 
 	The conclusion is that we will have two dictionaries:
-		template_sentences
+		template_paragraphs
 		story_sentences
 
 	And that a class will be provided for methods for each
