@@ -10,9 +10,10 @@ class TemplateHandler:
         Add in the template_paragraphs dictionary
         and declare the token list
     """
-    def __init__(self, template_paragraphs):
+    def __init__(self, template_paragraphs, max_differences_per_sentence):
         self.template_paragraphs = template_paragraphs
         self.token_list = []
+        self.max_differences_per_sentence = max_differences_per_sentence
 
     def clear(self):
         self.token_list = []
@@ -23,16 +24,23 @@ class TemplateHandler:
     def get_sentence_texts(self, paragraph_num, sentence_num):
         # Get the angel's and demon's versions of the main sentence
         dual_text = self._get_angel_and_demon_text(paragraph_num, sentence_num)
+        print(dual_text)
 
     def _get_angel_and_demon_text(self, paragraph_num, sentence_num):
         angel_text = ""
         demon_text = ""
         sentence_data = self.template_paragraphs[paragraph_num][sentence_num]\
             ['main_sentence']
-        template_text = sentence_data["template"]
-        # Get number of words to choose
-        num_opts = template_text.count("?")
+        demon_text = sentence_data["template"]
+        angel_text = sentence_data["template"]
+        # Get set of word numbers in which the demon's choice is to be
+        # different
+        word_diff_list = []
+        word_diff_list = self._get_word_diff_list(sentence_data["template"])
+        print(word_diff_list)
         # For each alternative word option
+        count = 0
+        diff_count = 0
         for alt in sentence_data["alternatives"]:
             demon_word = ""
             angel_word = ""
@@ -41,21 +49,57 @@ class TemplateHandler:
                 demon_word = self._get_token(alt["acquired_id"], False)
                 angel_word = self._get_token(alt["acquired_id"], True)
             else:
+                # Select the words from the list of alternatives
                 word_choice = random.sample(alt["options"], 2)
-                if alt["defined_id"] != "":
-                    self._set_token(alt["defined_id"], word_choice)
+                if alt["definitive_id"] != "":
+                    self._set_token(alt["definitive_id"], word_choice)
+                angel_word = word_choice[0]
+                demon_word = word_choice[1]
 
-    def _set_token(token_name, values):
+            # Assign the words to the relevant sentences
+            angel_text = angel_text.replace("?", angel_word, 1)
+            # Check whether the demon's choice is different
+            if diff_count < len(word_diff_list):
+                if count == word_diff_list[diff_count]:
+                    demon_text = demon_text.replace("?", demon_word, 1)
+                    diff_count += 1
+                else:
+                    demon_text = demon_text.replace("?", angel_word, 1)
+            else:
+                demon_text = demon_text.replace("?", angel_word, 1)
+
+            count += 1
+
+        return [angel_text, demon_text]
+
+    def _set_token(self, token_name, values):
         token_obj = [token_name, values[0], values[1]]
-        self.token_list.push(token_obj)
+        self.token_list.append(token_obj)
 
-    def _get_token(token_name, is_angel):
+    def _get_token(self, token_name, is_angel):
         for token in self.token_list:
             if token[0] == token_name:
                 return token[1] if is_angel else token[2]
         # If token not found, then this is an error
         print(f"_get_token: token not found: {token_name}")
         raise systemExit()
+
+    """
+        Get list of template word replacement numbers that are
+        to be differenct between angel and demon
+    """
+    def _get_word_diff_list(self, template_text):
+        num_substitutes = template_text.count("?")
+        num_list = list(range(num_substitutes))
+        # Select the word numbers to change
+        if num_substitutes <= self.max_differences_per_sentence:
+            return num_list
+
+        # Otherwise, choose a subset and order it
+        num_list = random.sample(num_list,
+                                 self.max_differences_per_sentence)
+        num_list.sort()
+        return num_list
 
 
 # Template Data
