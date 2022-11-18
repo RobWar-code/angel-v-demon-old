@@ -2,6 +2,7 @@
     Classes and Data for creating stories from templates
 """
 import random
+import re
 
 
 class TemplateHandler:
@@ -73,8 +74,9 @@ class TemplateHandler:
     def _get_angel_and_demon_text(self, paragraph_num, sentence_num):
         angel_text = ""
         demon_text = ""
-        sentence_data = self.template_paragraphs[paragraph_num][sentence_num]\
-            ['main_sentence']
+        p = paragraph_num
+        s = sentence_num
+        sentence_data = self.template_paragraphs[p][s]['main_sentence']
         demon_text = sentence_data["template"]
         angel_text = sentence_data["template"]
         # Get set of word numbers in which the demon's choice is to be
@@ -130,7 +132,8 @@ class TemplateHandler:
     def _get_token(self, token_name, is_angel):
         for token in self.token_list:
             if token[0] == token_name:
-                return token[1] if is_angel else token[2]
+                value = token[1] if is_angel else token[2]
+                return value
         # If token not found, then this is an error
         print(f"_get_token: token not found: {token_name}")
         raise SystemExit()
@@ -302,10 +305,15 @@ class StoryHandler(TemplateHandler):
         self.num_paragraphs = num_paragraphs
         self.story_sentences = story_sentences
         self.story_created = False
+        self.current_sentence_num = 0
 
     def _clear(self):
         self.story_sentences = []
 
+    """
+        Create a story from the template and append sentence data to
+        the story_sentences dictionary
+    """
     def create_story(self):
         # Get the list of template paragraph numbers to use
         num_template_paras = super().get_num_paragraphs()
@@ -318,14 +326,83 @@ class StoryHandler(TemplateHandler):
             sentence_num = 0
             while not para_finished:
                 sentence_data = {}
+                sentence_data["template_paragraph_num"] = para_num
+                sentence_data["template_sentence_num"] = sentence_num
                 sentence_data = super().get_sentence_texts(
                     para_num, sentence_num)
                 self.story_sentences.append(sentence_data)
                 if sentence_data["good_consequence"]:
                     para_finished = True
                 sentence_num += 1
-        print(story_sentences)
+
+    """
+        Print the angel's version of the story
+    """
+    def print_angel_story(self):
+        for sentence_data in self.story_sentences:
+            print(sentence_data["angel_text"])
+            if sentence_data["good_consequence"]:
+                print(sentence_data["good_consequence"])
+
+    def print_demon_current_sentence(self):
+        sentence_data = self.story_sentences[self.current_sentence_num]
+        print(sentence_data["demon_text"])
+        self.current_sentence_num += 1
+
+    def print_demon_previous_sentence(self):
+        sentence_data = self.story_sentences[self.current_sentence_num - 1]
+        print(sentence_data["demon_text"])
+
+    """
+        Check the substitution string entered by the user as a string of
+        " red=blue ..." against the (angel's) sentence displayed (previous)
+        returns one of:
+            "invalid"
+            "match"
+            "no match"
+    """
+    def test_angel_substitutes(self, subs):
+        sub_list = subs.split()
+        if len(sub_list) == 0:
+            return "invalid"
+        # Check each term for errors
+        for term in sub_list:
+            if term.count("=") != 1:
+                return "invalid"
+            terms = term.split("=")
+            if len(terms) != 2:
+                return "invalid"
+            for i in range(2):
+                if re.fullmatch("^[a-z]+$", terms[i]) is None:
+                    return "invalid"
+
+        # Loop through each term and make substitutions
+        n = self.current_sentence_num - 1
+        demon_text = self.story_sentences[n]["demon_text"]
+        angel_text = self.story_sentences[n]["angel_text"]
+        for term in sub_list:
+            terms = term.split("=")
+            demon_word = terms[0]
+            angel_word = terms[1]
+            # Replace the demon word in the demon text by the angel word
+            demon_text = demon_text.replace(demon_word, angel_word)
+
+        # Compare with angel's sentence
+        if demon_text != angel_text:
+            return "no match"
+        return "match"
 
 
 # ------------------------------------------------------------------------
+"""
+    Array of the following:
+    {
+        template_paragraph_num: integer
+        template_sentence_num: integer
+        angel_text: string
+        demon_text: string
+        ill_consequence: string
+        good_consequence: string
+    }
+"""
 story_sentences = []

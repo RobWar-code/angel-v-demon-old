@@ -316,17 +316,20 @@
 	StoryHandler properties:
 		story_set - whether a story has been created
 		story_sentences - dictionary
-		current_sentence
+		current_sentence_num
 		num_story_sentences
+		num_paragraphs
 
 	StoryHandler methods:
 		clear()
-		create_story(num_paragraphs) - this generates the story data from the templates
+		create_story() - this generates the story data from the templates
 			super().num_template_sentences()
 			super().get_sentence_texts(template_sentence_num)
 		set_story_sentence(story_sentence_num)
 		test_angel_substitutes(string of x=y ..)
-		print_story_text()
+		print_angel_story()
+		print_demon_current_sentence()
+		print_demon_previous_sentence()
 		get_sentence_text(story_sentence_num, is_angel)
 
 ## Coding Strategy
