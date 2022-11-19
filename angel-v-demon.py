@@ -20,7 +20,8 @@ def main():
     games_ended = False
     while not games_ended:
         display_instructions()
-
+        # Get number of paragraphs
+        num_paragraphs = enter_num_paras()
         # Set-up story object
         # story = story_template.StoryHandler(story_template.template_paragraphs,
         #                                    num_paragraphs,
@@ -63,6 +64,23 @@ to replace it. For Example:""")
     user_input = input("ENTER to continue, Q to quit: ")
     if user_input == "Q" or user_input == "q":
         raise SystemExit()
+
+
+def enter_num_paras():
+    invalid = True
+    while invalid:
+        user_input = input("""Please enter number of paragraphs for \
+the story (1 to 5): """)
+        if user_input == "Q" or user_input == "q":
+            raise SystemExit()
+        if len(user_input) != 1:
+            print("Value entered was not valid")
+        elif user_input not in "12345":
+            print("Number not valid")
+        else:
+            n = int(user_input)
+            invalid = False
+    return n
 
 
 main()
