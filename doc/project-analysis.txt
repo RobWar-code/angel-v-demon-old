@@ -17,7 +17,7 @@
 
 ## Intended Audience
 	For any computer games player who would like a memory game with a touch of
-	adventure and who access to the Python run-time environment.
+	adventure and who has access to the Python run-time environment.
 
 ## Outline of the Game 
 	Play begins with a brief explanation of the game on the console as follows:
@@ -62,7 +62,24 @@
 
 	Alternative winning "routes" are a possibility.
 
-	Choices with hints are a possibility
+	Choices with hints/clues are a possibility
+
+## User Design Elements
+	The user should have a clear idea of the game objectives:
+		An explanation of the game and clear instructions precede
+		play
+
+	Instructions for inputs should be easily understood:
+		Input is prompted for with text on each line
+
+	The user should receive a sense of accomplishment:
+		A score (based on time and number of sentences completed)
+		is calculated and presented to the user at each completion.
+		A high score in a session is maintained.
+
+	It should be easy to quit the program:
+		A "quit" option is available at every user input
+
 
 ## Scope
 	It is currently estimated that 3 man weeks are available for analysis
@@ -85,7 +102,7 @@
 
 ## Logic Analysis
 
-               START
+            START
 
 			Declare the story object (global)
 
