@@ -5,6 +5,7 @@
 	Intended Audience
 	Outline of the Game
 		Additional Options
+	User Design Elements
 	Scope
 	Logic Analysis
 		Create Story Data
@@ -166,7 +167,7 @@
 	Because there are more than two levels of nested loops, the code should be split into
 	functions with nested calls:
 
-	game_loop
+	games_loop - in main()
 		repeat_game_loop
 			sentence_loop
 				word_input_loop						

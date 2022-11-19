@@ -5,6 +5,7 @@
     player to correct.
 """
 import os
+import time
 import story_template
 
 # Globals
@@ -22,13 +23,46 @@ def main():
         display_instructions()
         # Get number of paragraphs
         num_paragraphs = enter_num_paras()
+        # Get player level
+        player_level = enter_player_level()
+        # Determine play parameters
+        start_num_fairies = (4 - player_level) * num_paragraphs
+        player_read_time = 12 * num_paragraphs / player_level
+        expected_time_per_sentence = 20 / player_level
         # Set-up story object
-        # story = story_template.StoryHandler(story_template.template_paragraphs,
-        #                                    num_paragraphs,
-        #                                    max_differences_per_sentence,
-        #                                    story_template.story_sentences)
+        story = story_template.StoryHandler(
+            story_template.template_paragraphs,
+            num_paragraphs,
+            max_differences_per_sentence,
+            story_template.story_sentences)
+
+        story.create_story()
+        # Repeat game loop
+        repeat_game_loop(num_paragraphs, expected_time_per_sentence)
         # debug
         games_ended = True
+
+
+def repeat_game_loop(num_paragraphs, expected_time_per_sentence):
+    global story
+    game_repeat_finished = False
+    while not game_repeat_finished:
+        # Print the angel's story
+        print()
+        print("ANGEL'S STORY")
+        print()
+        story.print()
+        # Display Count Down Loop
+        # Determine total display time
+        time_limit = Math.floor(
+            expected_time_per_sentence * num_paragraphs * 3 / 2)
+        display_time = str(time_limit).zfill(3)
+        print(display_time, end="")
+        while time_limit > 0:
+            time.sleep(1)
+            time_limit -= 1
+            display_time = str(time_limit).zfill(3)
+            print("\b\b\b" + display_time, end="")
 
 
 def display_introduction():
@@ -76,6 +110,23 @@ the story (1 to 5): """)
         if len(user_input) != 1:
             print("Value entered was not valid")
         elif user_input not in "12345":
+            print("Number not valid")
+        else:
+            n = int(user_input)
+            invalid = False
+    return n
+
+
+def enter_num_paras():
+    invalid = True
+    while invalid:
+        user_input = input("""Please enter player level\
+ (1 to 4, 1 easiest): """)
+        if user_input == "Q" or user_input == "q":
+            raise SystemExit()
+        if len(user_input) != 1:
+            print("Value entered was not valid")
+        elif user_input not in "1234":
             print("Number not valid")
         else:
             n = int(user_input)
