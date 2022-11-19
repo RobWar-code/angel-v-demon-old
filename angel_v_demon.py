@@ -5,6 +5,7 @@
     player to correct.
 """
 import math
+import platform
 import os
 import time
 import story_template
@@ -40,11 +41,11 @@ def main():
 
         story.create_story()
         # Repeat game loop
-        repeat_game_loop(num_paragraphs, player_level,
-                         expected_time_per_sentence,
-                         start_num_fairies)
-        # debug
-        games_ended = True
+        new_game = repeat_game_loop(num_paragraphs, player_level,
+                                    expected_time_per_sentence,
+                                    start_num_fairies)
+        if not new_game:
+            games_ended = True
 
 
 def repeat_game_loop(num_paragraphs, player_level, expected_time_per_sentence,
@@ -62,11 +63,20 @@ def repeat_game_loop(num_paragraphs, player_level, expected_time_per_sentence,
         time_limit = math.floor(
             expected_time_per_sentence * num_paragraphs * 3 / 2)
         display_timer(time_limit)
+        # Clear the display
+        if platform.system() == "Windows":
+            os.system("cls")
+        else:
+            os.system("clear")
+
         # Do the demon's sentence display
-        sentence_loop(num_paragraphs, player_level, start_num_fairies,
-                      expected_time_per_sentence)
-        # debug
-        game_repeat_finished = True
+        game_opts = sentence_loop(num_paragraphs, player_level,
+                                  start_num_fairies,
+                                  expected_time_per_sentence)
+        if not game_opts["replay"]:
+            game_repeat_finished = True
+
+    return game_opts["new_game"]
 
 
 def sentence_loop(num_paragraphs, player_level, start_num_fairies,
@@ -79,7 +89,7 @@ def sentence_loop(num_paragraphs, player_level, start_num_fairies,
     new_game = False
     replay = False
     # Set the time counter for scoring
-    time_start = math.round(time.time())
+    time_start = math.ceil(time.time())
     while not failed and got_sentence:
         # Print the next demon's sentence
         print("The Demon says:-")
@@ -112,7 +122,7 @@ def sentence_loop(num_paragraphs, player_level, start_num_fairies,
     else:
         print("The crowd cheers")
         # Calculate Score
-        time_end = math.round(time.time())
+        time_end = math.ceil(time.time())
         diff_time = time_end - time_start
         target = num_paragraphs * 3 * expected_time_per_sentence
         score = player_level * (200 + target - diff_time)
@@ -127,10 +137,10 @@ def sentence_loop(num_paragraphs, player_level, start_num_fairies,
         # Offer of new game
         print()
         user_input = input("Play another game Y or Q to quit: ")
-        if user_input == "Q" or user_input == "q":
-            raise SystemExit()
         if user_input == "Y" or user_input == "y":
             new_game = True
+        else:
+            raise SystemExit()
 
     return {"new_game": new_game, "replay": replay}
 

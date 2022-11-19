@@ -345,10 +345,10 @@ class StoryHandler(TemplateHandler):
                 print(sentence_data["good_consequence"])
 
     def print_demon_current_sentence(self):
-        paragraph_end = false
+        paragraph_end = False
         sentence_data = self.story_sentences[self.current_sentence_num]
         print(sentence_data["demon_text"])
-        if sentence_data.good_consequence:
+        if sentence_data["good_consequence"]:
             paragraph_end = True
         self.current_sentence_num += 1
         return paragraph_end
@@ -360,6 +360,10 @@ class StoryHandler(TemplateHandler):
     def print_good_consequence(self):
         sentence_data = self.story_sentences[self.current_sentence - 1]
         print(sentence_data["good_consequence"])
+
+    def print_ill_consequence(self):
+        sentence_data = self.story_sentences[self.current_sentence - 1]
+        print(sentence_data["ill_consequence"])
 
     """
         Check the substitution string entered by the user as a string of
