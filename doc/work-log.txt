@@ -10,10 +10,14 @@ Work Due
     Start README
 
     Write Systems Test Plan
+        Add reference to readme
 
     Execute Systems Test Plan
+        Screen shot results for README
 
     Add one or two more paragraph templates and test
+
+    Do python lint test - see: PEP8
 
 Work Done
     20/11/22
