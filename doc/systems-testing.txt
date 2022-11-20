@@ -13,7 +13,6 @@ The general procedures are as follows
 2e. Check that the logic flows correctly from the inputs
 3. Check randomly selected branch points (see the section Logic Analysis in
     project-analysis.txt, these are numbered "Rnn" on the flow-chart)
-
-Ensure that the game is feasible for players, adjust accordingly.
+4. Ensure that the game is feasible for players, adjust accordingly.
 
 See the README file for the Systems Test Results

@@ -114,13 +114,13 @@
 
    o---------->I01, I02)print introduction/instructions - game_loop()
    |
-   |        o->I03) input difficulty level (calculate time for display, max score and no. fairies) 
+   |        o->I03)  input number of paragraphs 
    |        |
    |        |  check for quit -->
    |        |
    |        o-<if invalid
    |    
-   |        o-->I04) input number of sentences
+   |        o-->I04) input difficulty level (calculate time for display, max score and no. fairies)
    |        |
    |        |  check for quit -->
    |        |
