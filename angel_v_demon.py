@@ -95,7 +95,7 @@ def sentence_loop(num_paragraphs, player_level, start_num_fairies,
         Presentation of each demon's sentence and user's responses
     """
     global story, hi_score
-    fairy_count = 0
+    fairy_count = start_num_fairies
     paragraph_count = 0
     got_sentence = True
     failed = False
@@ -110,7 +110,9 @@ def sentence_loop(num_paragraphs, player_level, start_num_fairies,
         if paragraph_end:
             paragraph_count += 1
         # Get and check user corrections
-        failed = word_loop()
+        word_loop_ret = word_loop(fairy_count)
+        failed = word_loop_ret.failed
+        fairy_count = word_loop_ret.fairy_count
 
         if (paragraph_end and not failed):
             # Print the consequence
@@ -158,7 +160,7 @@ def sentence_loop(num_paragraphs, player_level, start_num_fairies,
     return {"new_game": new_game, "replay": replay}
 
 
-def word_loop():
+def word_loop(fairy_count):
     """
         User response to demon's sentences and options arising
     """
@@ -169,6 +171,7 @@ def word_loop():
         if (failed):
             print("WRONG - The demon chuckles..")
             if (fairy_count > 0):
+                fairy_count = fairy_count - 1
                 # The fairy intervenes
                 if math.random() < 0.5:
                     print("A fairy gives you another chance")
@@ -181,7 +184,7 @@ def word_loop():
                 story.print_ill_consequence()
                 try_again = False
 
-    return failed
+    return {"failed": failed, "fairy_count": fairy_count}
 
 
 def get_user_corrections():

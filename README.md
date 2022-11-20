@@ -9,6 +9,7 @@ A command-line adventure/memory game for a solo player.
             <li>Game Start Texts</li>
             <li>Input Point Tests</li>
             <li>Random Branch Point Tests</li>
+            <li>Playability Tests</li>
         </ul>
     </li>
 </ul>
@@ -52,41 +53,58 @@ d. * Check for availability of the quit option
 
 e. Check that the logic flows correctly from the inputs
 
-I03 Input difficulty level
-
-a. Ensure input prompt is clearly understandable
-
-b. Check response to garbage input
-
-c. Check input validation
-
-d. Check for availability of the quit option
-
 e. Check that the logic flows correctly from the inputs
 
-I04 Input number of paragraphs
+I03 Input number of paragraphs
 
-a. Ensure input prompt is clearly understandable
+a. * Ensure input prompt is clearly understandable
 
-b. Check response to garbage input
+b. * Check response to garbage input
 
-c. Check input validation
+c. * Check input validation
 
-d. Check for availability of the quit option
+d. * Check for availability of the quit option
 
-e. Check that the logic flows correctly from the inputs
+e. * Check that the logic flows correctly from the inputs
+
+I04 Input difficulty level
+
+a. * Ensure input prompt is clearly understandable
+
+b. * Check response to garbage input
+
+c. * Check input validation
+
+d. * Check for availability of the quit option
+
+e. * Check that the logic flows correctly from the inputs
 
 I05 Input for replacement words
 
-a. Ensure input prompt is clearly understandable
+a. * Ensure input prompt is clearly understandable
 
-b. Check response to garbage input
+b. * Check response to garbage input
 
-c. Check input validation
+c. * Check input validation
 
-d. Check for availability of the quit option
+d. * Check for availability of the quit option
 
 e. Check that the logic flows correctly from the inputs
+
+    Correct Answer
+
+        General
+
+        End of Paragraph
+
+        End of Game
+
+    Incorrect Answer
+
+        Bug: word_loop() fairy-count not found
+        Fix: pass and return the fairy_count variable from the calling function
+        Bug: word_loop() math.random() does not exist
+        Fix: use random.random()
 
 I06 Input repeat same game
 
