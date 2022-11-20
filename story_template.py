@@ -1,8 +1,15 @@
 """
+    Author: Robin Warner November 2022
     Classes and Data for creating stories from templates
 """
 import random
 import re
+
+
+"""
+    Methods for handling the sentence and paragraph template
+    data to generate variable stories.
+"""
 
 
 class TemplateHandler:
@@ -16,9 +23,15 @@ class TemplateHandler:
         self.token_list = []
         self.max_differences_per_sentence = max_differences_per_sentence
 
+    """
+        Clear the list of tokens and their values
+    """
     def clear(self):
         self.token_list = []
 
+    """
+        Get the total number of paragraphs in the story template
+    """
     def get_num_paragraphs(self):
         return len(self.template_paragraphs)
 
@@ -140,7 +153,7 @@ class TemplateHandler:
 
     """
         Get list of template word replacement numbers that are
-        to be differenct between angel and demon
+        to be different between angel and demon
     """
     def _get_word_diff_list(self, template_text):
         num_substitutes = template_text.count("?")
@@ -157,7 +170,7 @@ class TemplateHandler:
 
 
 # --------------------------------------------------------------------
-# Template Data
+# Sentence Template Data
 template_paragraphs = [
     [
         {
@@ -293,6 +306,12 @@ template_paragraphs = [
 
 
 # -------------------------------------------------------------------------
+"""
+    Handler to generate and retain a specific story created by the
+    template handler. Methods for accessing the completed story
+"""
+
+
 class StoryHandler(TemplateHandler):
     """
         Assign the initial data
@@ -334,6 +353,7 @@ class StoryHandler(TemplateHandler):
                 if sentence_data["good_consequence"]:
                     para_finished = True
                 sentence_num += 1
+        self.story_created = True
 
     """
         Print the angel's version of the story
@@ -345,6 +365,9 @@ class StoryHandler(TemplateHandler):
                 print(sentence_data["good_consequence"])
                 print()
 
+    """
+        Display the demon's version of the  current sentence
+    """
     def print_demon_current_sentence(self):
         paragraph_end = False
         sentence_data = self.story_sentences[self.current_sentence_num]
@@ -354,14 +377,23 @@ class StoryHandler(TemplateHandler):
         self.current_sentence_num += 1
         return paragraph_end
 
+    """
+        Display the same demon's version of the sentence again
+    """
     def print_demon_previous_sentence(self):
         sentence_data = self.story_sentences[self.current_sentence_num - 1]
         print(sentence_data["demon_text"])
 
+    """
+        Display the good consequence sentence arising from the current sentence
+    """
     def print_good_consequence(self):
         sentence_data = self.story_sentences[self.current_sentence - 1]
         print(sentence_data["good_consequence"])
 
+    """
+        Display the ill consequence sentence arising from the current sentence
+    """
     def print_ill_consequence(self):
         sentence_data = self.story_sentences[self.current_sentence - 1]
         print(sentence_data["ill_consequence"])

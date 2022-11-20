@@ -1,5 +1,7 @@
 """
     angel-v-demon
+    Author: Robin Warner November 2022
+
     A command-line game for one player, presenting a story to be memorised by
     the player, and re-presented line by line with modifications for the
     player to correct.
@@ -16,6 +18,10 @@ hi_score = 0
 
 
 def main():
+    """
+        User interaction loops
+        New game loop
+    """
     global story
 
     # Introduce the game
@@ -50,6 +56,10 @@ def main():
 
 def repeat_game_loop(num_paragraphs, player_level, expected_time_per_sentence,
                      start_num_fairies):
+    """
+        First and subsequent loops for the player to
+        try the same game again
+    """
     global story
     game_repeat_finished = False
     while not game_repeat_finished:
@@ -81,6 +91,9 @@ def repeat_game_loop(num_paragraphs, player_level, expected_time_per_sentence,
 
 def sentence_loop(num_paragraphs, player_level, start_num_fairies,
                   expected_time_per_sentence):
+    """
+        Presentation of each demon's sentence and user's responses
+    """
     global story, hi_score
     fairy_count = 0
     paragraph_count = 0
@@ -146,6 +159,9 @@ def sentence_loop(num_paragraphs, player_level, start_num_fairies,
 
 
 def word_loop():
+    """
+        User response to demon's sentences and options arising
+    """
     try_again = True
     while try_again:
         # Get user replacement words
@@ -169,6 +185,9 @@ def word_loop():
 
 
 def get_user_corrections():
+    """
+        User input of corrections to demon's sentence. Validation of input.
+    """
     global story
     invalid = True
     failed = False
@@ -192,7 +211,7 @@ def get_user_corrections():
 
 def display_timer(time_limit):
     """
-        Display a numeric timer for time_limit seconds
+        Display a numeric count-down timer for time_limit seconds
     """
     print()
     print("Count Down: ", end="")
@@ -208,6 +227,9 @@ def display_timer(time_limit):
 
 
 def display_introduction():
+    """
+        Display the general introduction to the game
+    """
     print("Welcome to Angel v Demon!")
     print()
     print("""In this game, you are presented with a story written for a
@@ -221,6 +243,9 @@ to restore it to its original form line by line and save the knight ...""")
 
 
 def display_instructions():
+    """
+        Display the general instructions for the game
+    """
     print()
     print("INSTRUCTIONS")
     print()
@@ -245,6 +270,9 @@ to replace it. For Example:""")
 
 
 def enter_num_paras():
+    """
+        Collect the number of paragraphs for the story from the user
+    """
     invalid = True
     while invalid:
         print()
@@ -263,6 +291,9 @@ the story (1 to 5): """)
 
 
 def enter_player_level():
+    """
+        Collect the player difficulty level from the user
+    """
     invalid = True
     while invalid:
         print()
@@ -280,4 +311,5 @@ def enter_player_level():
     return n
 
 
+# Call to user-interaction loop
 main()
