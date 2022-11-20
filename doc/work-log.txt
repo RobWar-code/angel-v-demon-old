@@ -3,8 +3,8 @@ Contents
     Work Done
 
 Work Due
-    Comment all code functions
-    
+    * Comment all code functions
+
     Review course project requirements
 
     Start README
@@ -12,6 +12,8 @@ Work Due
     Write Systems Test Plan
 
     Execute Systems Test Plan
+
+    Add one or two more paragraph templates and test
 
 Work Done
     20/11/22

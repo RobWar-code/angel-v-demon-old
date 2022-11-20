@@ -81,6 +81,11 @@
 	It should be easy to quit the program:
 		A "quit" option is available at every user input
 
+	Each game should be a bit different, to retain interest:
+		The use of sentence and paragraph templates provides
+		for a resonable degree of diversity from game to
+		game, whilst allowing the user to memorise the range of
+		options
 
 ## Scope
 	It is currently estimated that 3 man weeks are available for analysis
