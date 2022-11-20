@@ -112,15 +112,15 @@
 
 			Declare the story object (global)
 
-   o---------->print introduction/instructions - game_loop()
+   o---------->I01, I02)print introduction/instructions - game_loop()
    |
-   |        o->input difficulty level (calculate time for display, max score and no. fairies) 
+   |        o->I03) input difficulty level (calculate time for display, max score and no. fairies) 
    |        |
    |        |  check for quit -->
    |        |
    |        o-<if invalid
    |    
-   |        o-->input number of sentences
+   |        o-->I04) input number of sentences
    |        |
    |        |  check for quit -->
    |        |
@@ -132,7 +132,7 @@
    ^  |
   /|\ |  o---->present demon's sentence/instruction - sentence_loop()
    |  |  |
-   |  |  |  o->prompt/input for replacement word(s) - (upto 3 words) ie: sword=club -
+   |  |  |  o->I05) prompt/input for replacement word(s) - (upto 3 words) ie: sword=club -
    |  |  |  |  word_input_loop()
    |  |  |  |
    |  |  |  |  check for quit -->
@@ -147,17 +147,17 @@
    |  |  |  |
    |  |  |  |     if a fairy intervenes
    |  |  |  |
-   |  |  |  o--<-----50/50 chance of the fairy offering another try, otherwise proceed
+   |  |  |  o--<----R01) 50/50 chance of the fairy offering another try, otherwise proceed
    |  |  |
    |  |  O-----<-----print fairy message
    |  |  |
    |  |  |         print knight doomed message (ill_consequence)
    |  |  |
-   |  o------------prompt input repeat the same game
+   |  o------------I06) prompt input repeat the same game
    |     |
-   O-----------<---prompt input another game
+   O-----------<---I07) prompt input another game
    |     |
-   |     |      Check whether last sentence of the paragraph
+   |     |      Check whether this is last sentence of the paragraph
    |     |				 
    |     |         display the good consequence of this sentence gratis
    |     |
@@ -165,7 +165,7 @@
    |
    |            display success message
    |
-   o-----------<prompt input for play again
+   o-----------<I08) prompt input for play again
 
 	Coding Notes
 

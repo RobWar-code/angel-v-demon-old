@@ -1,0 +1,19 @@
+Angel v Demon
+
+Systems Test Outline
+
+The general procedures are as follows
+1. Check the start-up texts
+2. Check all input points (see the section Logic Analysis in 
+    project-analysis.txt these are numbered "Inn" on the flow-chart)
+2a. Ensure input prompt is clearly understandable
+2b. Check response to garbage input
+2c. Check input validation
+2d. Check for availability of the quit option
+2e. Check that the logic flows correctly from the inputs
+3. Check randomly selected branch points (see the section Logic Analysis in
+    project-analysis.txt, these are numbered "Rnn" on the flow-chart)
+
+Ensure that the game is feasible for players, adjust accordingly.
+
+See the README file for the Systems Test Results

@@ -174,7 +174,7 @@ def word_loop():
                     print("A fairy gives you another chance")
                     story.print_demon_previous_sentence()
                 else:
-                    print("The fairy saves the knight's life")
+                    print("A fairy saves the knight's life")
                     try_again = False
                     failed = False
             else:

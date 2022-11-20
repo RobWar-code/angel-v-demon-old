@@ -192,8 +192,10 @@ Version control software is used effectively:
 The entire application development process is documented:
 
     the purpose of the application is clearly described in the README
-    there is a clear separation between code written by the learner and code from external sources (e.g. libraries or tutorials).
-    All code from external sources is attributed to its source via comments above the code and (for more extensive dependencies) in the README.
+    there is a clear separation between code written by the learner and code from external sources 
+    (e.g. libraries or tutorials).
+    All code from external sources is attributed to its source via comments above the code and 
+    (for more extensive dependencies) in the README.
     clear, well-described, explanatory commit messages describe the development process
     the README is easy to follow
 
