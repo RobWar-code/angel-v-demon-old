@@ -3,12 +3,22 @@ Contents
     Work Done
 
 Work Due
-    Code Sentence Template Data
+    Comment all code functions
+    
+    Review course project requirements
 
-    Write and Test Template Class methods
+    Start README
 
-    Code and Test Sentence Text Class methods 
+    Write Systems Test Plan
 
-    Write and Test the main interactive loops functions
+    Execute Systems Test Plan
 
 Work Done
+    20/11/22
+        * Code Sentence Template Data
+
+        * Write and Test Template Class methods
+
+        * Code and Test Sentence Text Class methods 
+
+        * Write and Test the main interactive loops functions

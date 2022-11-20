@@ -343,6 +343,7 @@ class StoryHandler(TemplateHandler):
             print(sentence_data["angel_text"])
             if sentence_data["good_consequence"]:
                 print(sentence_data["good_consequence"])
+                print()
 
     def print_demon_current_sentence(self):
         paragraph_end = False

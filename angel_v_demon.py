@@ -180,7 +180,7 @@ def get_user_corrections():
         # Check the input against the angel's sentence
         result = story.test_angel_substitutes(user_input)
         if (result == "match"):
-            invalid = false
+            invalid = False
         elif (result == "no match"):
             invalid = False
             failed = True
@@ -235,6 +235,7 @@ the corrections with each.""")
     print("""On a single input line, for each correction that you recall, type
 in the word to be replaced, followed by an equals sign, followed by the word
 to replace it. For Example:""")
+    print()
     print("red=blue bear=dragon")
     print()
     print("You can leave the games any time by entering Q")

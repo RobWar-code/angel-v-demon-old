@@ -1,0 +1,188 @@
+LO1 	Implement a given algorithm as a computer program
+LO2 	Adapt and combine algorithms to solve a given problem
+LO3 	Adequately use standard programming constructs: repetition, selection, functions, composition, modules, aggregated data (arrays, lists, etc.)
+LO4 	Explain what a given program does
+LO5 	Identify and repair coding errors in a program
+LO6 	Use library software for building a graphical user interface, or command-line interface, or web application, or mathematical software
+LO7 	Implement a data model, application features and business logic to manage, query and manipulate data to meet given needs in a particular real-world domain.
+LO8 	Demonstrate and document the development process through a version control system such as GitHub
+L09 	Deploy a command-line application to a cloud-based platform
+All Pass criteria must be achieved for a pass to be awarded.
+
+LO1Implement a given algorithm as a computer program
+1.1 	Write Python code that passes through a linter (eg PEP8) with no significant issues.
+1.2 	Ensure all intended functionality works as per the critical project objectives
+1.3 	Write code that meets minimum standards for readability (comments, indentation, consistent and meaningful naming conventions).
+
+LO2 Adapt and combine algorithms to solve a given problem
+2.1 	Write code that handles empty or invalid input data.
+2.2 	Clearly separate and identify code written for the application and code from external sources (e.g. libraries or tutorials)
+2.3 	Ensure a consistent flow of logic and data with well defined granular functions
+
+LO3 Adequately use standard programming constructs: repetition, selection, functions, composition, modules, aggregated data (arrays, lists, etc.)
+3.1 	Implement standard programming constructs such as flow control, iteration, selection, functions, object-oriented programming and data structures - as appropriate - to achieve the project goals.
+3.2 	Implement exception/error handling to optimise the user experience
+
+LO4 Explain what a given program does
+4.1 	Use consistent and effective markdown formatting that is well-structured, easy to follow, and has few grammatical errors when writing a README file.
+4.2 	Write a README.md file in English for the Python application that explains its purpose and the value that it provides to its users.
+
+LO5 Identify and repair coding errors in a program
+5.1 	Implement basic manual testing procedures for code validation
+
+LO6 Use library software for building a graphical user interface, or command-line interface, or web application, or mathematical software
+6.1 	Implement the use of external Python libraries where appropriate to provide the functionality that the project requires.
+
+LO7 Implement a data model, application features and business logic to manage, query and manipulate data to meet given needs in a particular real-world domain.
+7.1 	Implement a working data model that supports the intended project functionality
+7.2 	Write code that queries and manipulates data to meet the identified vital project needs.
+
+LO8 Demonstrate and document the development process through a version control system such as GitHub
+8.1 	Use Git & GitHub for version control of the web application up to deployment.
+
+LO9 Deploy a command-line application
+9.1 	Deploy a final version of the Python Essentials application code to a cloud-based platform.
+9.2 	Ensure that the deployed application is free of commented out code.
+All Pass criteria must be achieved for a pass to be awarded.
+Merit Performance
+
+To evidence performance at the MERIT level, a learner will, in general, demonstrate characteristics of performance at the MERIT level, as suggested below. However, the learner must achieve ALL listed merit criteria.
+
+The learner has a clear rationale for the development of this project and has produced a fully functioning, documented application for a real-life audience. Data validation and user feedback are all evident in the code and the working application. There are no logic errors in the code, and the application functions as expected.
+
+The finished project has a clear, well-defined purpose addressing the needs of a particular target audience (or multiple related audiences) and a specific data domain. Its purpose would be immediately evident to a new user without having to look at supporting documentation. The user is kept informed of progress and actions through feedback and, where large data sets are being loaded, progress indicators.
+
+Code is well-organised and easy to follow, and the application has been fully tested, following a manual testing procedure, with no apparent errors left in the code.
+
+The development process is evident through commit messages. The project’s documentation provides a clear rationale for the development of this project.
+
+The application is robust and deals with external errors gracefully (user input).
+1.1 	Translate the intended logic into efficient code
+2.1 	Ensure a consistent flow of logic and data with well defined granular functions
+3.1 	Demonstrate a clear understanding of programming fundamental constructs. and their relationships
+3.2 	Implement OOP if appropriate to the project needs.
+4.1 	Document the work undertaken to plan this project’s logic through flow charts or diagrams
+5.1 	Document validation error-based fixes implemented and identify and explain any unsolved validation errors.
+5.2 	Document the implementation of manual testing for code validation(using PEP Validators).
+6.1 	Separate and identify code written for the application and code from external sources (e.g. libraries or tutorials)
+7.1 	Efficiently implement the intended functionality as per the key project goals
+8.1 	Document the rationale as to why a particular library/libraries are necessary for the implementation of the project.
+8.2 	Commit often for each feature/fix, ensuring that commits are small, well-defined and have clear, descriptive messages.
+8.3 	Demonstrate, through screenshots, what the project outcomes are and how they have been met.
+8.4 	Present a clear rationale for the development of the project in the README, demonstrating that it has a clear, well-defined purpose addressing the critical goals of the application for a particular target audience (or multiple related audiences).
+9.1 	Document the deployment procedure in a section in the README file.
+All Merit criteria must be achieved for merit to be awarded.
+Distinction Performance
+
+At this level, a learner will have achieved all pass and merit criteria, as described above, and will demonstrate characteristics of high-level performance as described below:
+
+Characteristics of performance at DISTINCTION level:
+
+The learner has documented a clear, justified rationale for a real-world application
+
+The development of the project has resulted in a fully-functioning Python application with a command-line interface
+
+There are no logic errors in the code. Where there is a clear breach of accepted design/UX principles or accepted good practice in code organisation, these are fully justified, appropriate and acceptable to the target user. It matches the design and demonstrates the characteristics of craftsmanship in the code. The resulting application is original and not a copy of any walkthrough projects encountered in the unit
+
+Amplification (craftsmanship):
+
+Design
+
+The design of the command line application demonstrates the main principles of imperative programming.
+
+User Control
+
+    All interaction with the application would be likely to produce a positive emotional response within the user. This is down to the flow of information and all interaction feedback.
+    Users are never asked for information that the application already has.
+    Errors resulting from user or data actions are reported to the user.
+
+Consistency
+
+    Consistency across all data operations,
+
+Confirmation
+
+    User and data actions are confirmed where appropriate, feedback is given at all times.
+
+Any design decisions that contravene accepted user interaction principles are identified and described (comments in code or a section in the README)
+
+Development and Implementation
+
+Code demonstrates the characteristics of ‘clean code’:
+
+Consistent and appropriate naming conventions within code and in file naming, e.g.
+
+    file names, class names, function names and variable names are descriptive and consistent
+
+Readability
+
+    code is indented in a consistent manner to ease readability, and there are no unnecessary repeated blank lines
+    all code is split into well-defined and commented sections
+
+Defensive design
+
+    all input data is validated (e.g. presence check, format check, range check)
+    internal errors are handled gracefully, and users are notified of the problem where appropriate.
+
+Comments
+
+    all custom code files include clear and relevant comments explaining the purpose of code segments
+
+Compliant code
+
+    Python code is consistent in style and conforms to the PEP8 style guide
+
+Robust code
+
+    no logic errors are found when running code
+    errors caused by user actions are handled
+    where used, API calls that fail to execute or return data will be handled gracefully, with the site users notified in an obvious way
+    inputs are validated when necessary
+
+The entire design is implemented, providing an excellent solution to the users' demands and expectations and security consideration.
+
+Real-world application
+
+    The final application is aligned with the critical project ideas presented at the start of the project.
+
+Security features and practice are evidenced.
+
+    Any passwords and security-sensitive information created are stored in environment variables or in files that are in .gitignore and are never committed to the repository
+
+Data is well structured
+
+    data is fully modelled and matches the intended project structure
+    data is well-structured
+
+Configuration and dependencies files are kept up to date.
+
+All noticeable errors have been corrected or documented:
+
+    user actions do not cause errors in the terminal
+
+Version control software is used effectively:
+
+    all code is managed in git with commit messages that reflect the specific reason for the commit
+    there is a separate, well-defined commit for each feature/fix
+    there are no very large commits which make it harder to understand the development process and could lead the assessor to suspect plagiarism
+
+The entire application development process is documented:
+
+    the purpose of the application is clearly described in the README
+    there is a clear separation between code written by the learner and code from external sources (e.g. libraries or tutorials).
+    All code from external sources is attributed to its source via comments above the code and (for more extensive dependencies) in the README.
+    clear, well-described, explanatory commit messages describe the development process
+    the README is easy to follow
+
+-->
+README
+
+Recommended structure for a README.md file:
+
+
+As a mandatory part of the submission, your project must have a readme file named README.md, in markdown format, that will describe all aspects of your project.
+
+The link below provides an official example of an expected structure for your readme file
+
+Example README.md template
+
