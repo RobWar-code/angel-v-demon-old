@@ -7,6 +7,7 @@
     player to correct.
 """
 import math
+import random
 import platform
 import os
 import time
@@ -173,11 +174,14 @@ def word_loop(fairy_count):
             if (fairy_count > 0):
                 fairy_count = fairy_count - 1
                 # The fairy intervenes
-                if math.random() < 0.5:
-                    print("A fairy gives you another chance")
+                if random.random() < 0.5:
+                    print()
+                    print("A fairy gives you another chance:")
                     story.print_demon_previous_sentence()
                 else:
+                    print()
                     print("A fairy saves the knight's life")
+                    print()
                     try_again = False
                     failed = False
             else:
