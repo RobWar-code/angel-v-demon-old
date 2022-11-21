@@ -114,7 +114,6 @@ def sentence_loop(num_paragraphs, player_level, start_num_fairies,
         word_loop_ret = word_loop(fairy_count)
         failed = word_loop_ret["failed"]
         fairy_count = word_loop_ret["fairy_count"]
-        print("Failed:", failed, "fairy_count:", fairy_count)
 
         if (paragraph_end and not failed):
             # Print the consequence

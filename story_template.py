@@ -388,14 +388,14 @@ class StoryHandler(TemplateHandler):
         Display the good consequence sentence arising from the current sentence
     """
     def print_good_consequence(self):
-        sentence_data = self.story_sentences[self.current_sentence - 1]
+        sentence_data = self.story_sentences[self.current_sentence_num - 1]
         print(sentence_data["good_consequence"])
 
     """
         Display the ill consequence sentence arising from the current sentence
     """
     def print_ill_consequence(self):
-        sentence_data = self.story_sentences[self.current_sentence - 1]
+        sentence_data = self.story_sentences[self.current_sentence_num - 1]
         print(sentence_data["ill_consequence"])
 
     """

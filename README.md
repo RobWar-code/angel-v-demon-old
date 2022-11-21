@@ -111,6 +111,16 @@ e. Check that the logic flows correctly from the inputs
             Bug: sentence_loop() invalid use of . notation for dict reference
             Fix: used bracketed notation ["xx"]
 
+        * Fairy Saves Life
+
+            * Continue to next sentence
+
+            * End of Game
+
+        Knight Fails
+            Bug: story_template.py print_ill_consequence() misspelled variable name
+            Fix: corrected spelling
+
 I06 Input repeat same game
 
 a. Ensure input prompt is clearly understandable
