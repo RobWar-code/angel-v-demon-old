@@ -86,6 +86,8 @@ def repeat_game_loop(num_paragraphs, player_level, expected_time_per_sentence,
                                   expected_time_per_sentence)
         if not game_opts["replay"]:
             game_repeat_finished = True
+        else:
+            story.reset()
 
     return game_opts["new_game"]
 
@@ -121,6 +123,8 @@ def sentence_loop(num_paragraphs, player_level, start_num_fairies,
             story.print_good_consequence()
             if paragraph_count >= num_paragraphs:
                 got_sentence = False
+        elif not paragraph_end and not failed:
+            print("Correct")
 
     if failed:
         user_input = input("Enter Y to replay game else ENTER: ")
@@ -129,14 +133,14 @@ def sentence_loop(num_paragraphs, player_level, start_num_fairies,
         if user_input == "Y" or user_input == "y":
             replay = True
         else:
-            user_input = input("Enter Y play a new game else ENTER: ")
+            user_input = input("Enter Y to play a new game else ENTER: ")
             if user_input == "Q" or user_input == "q":
                 raise SystemExit()
             if user_input == "Y" or user_input == "y":
                 new_game = True
 
     else:
-        print("The crowd cheers")
+        print("The crowd cheers - YOU WIN")
         # Calculate Score
         time_end = math.ceil(time.time())
         diff_time = time_end - time_start
@@ -185,7 +189,6 @@ def word_loop(fairy_count):
                     try_again = False
                     failed = False
             else:
-                print("Got Here")
                 story.print_ill_consequence()
                 try_again = False
         else:

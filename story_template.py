@@ -328,12 +328,21 @@ class StoryHandler(TemplateHandler):
 
     def _clear(self):
         self.story_sentences = []
+        self.reset()
+
+    """
+        Do settings to start or restart story
+    """
+    def reset(self):
+        self.current_sentence_num = 0
 
     """
         Create a story from the template and append sentence data to
         the story_sentences dictionary
     """
     def create_story(self):
+        # Clear any existing story
+        self._clear()
         # Get the list of template paragraph numbers to use
         num_template_paras = super().get_num_paragraphs()
         para_list = []

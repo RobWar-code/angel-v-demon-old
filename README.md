@@ -91,15 +91,15 @@ d. * Check for availability of the quit option
 
 e. Check that the logic flows correctly from the inputs
 
-    Correct Answer
+    * Correct Answer
 
-        General
+        * General
             Bug: word_loop() while condition not cancelled
             Fix: inserted else and reset flag
 
-        End of Paragraph
+        * End of Paragraph
 
-        End of Game
+        * End of Game
 
     Incorrect Answer
 
@@ -123,29 +123,35 @@ e. Check that the logic flows correctly from the inputs
 
 I06 Input repeat same game
 
-a. Ensure input prompt is clearly understandable
+a. * Ensure input prompt is clearly understandable
 
-b. Check response to garbage input
+b. * Check response to garbage input
 
-c. Check input validation
+c. N/A Check input validation
 
-d. Check for availability of the quit option
+d. * Check for availability of the quit option
 
-e. Check that the logic flows correctly from the inputs
+e. * Check that the logic flows correctly from the inputs
+
+    Bug: story.print_demon_current_sentence() list index out of range
+    Fix: add a reset function to StoryHandler and call from replay in repeat_game_loop()
 
 I07 Input start another game
 
-a. Ensure input prompt is clearly understandable
+a. * Ensure input prompt is clearly understandable
 
-b. Check response to garbage input
+b. * Check response to garbage input
 
-c. Check input validation
+c. N/A Check input validation
 
-d. Check for availability of the quit option
+d. * Check for availability of the quit option
 
-e. Check that the logic flows correctly from the inputs
+e. * Check that the logic flows correctly from the inputs
 
-I08 Input start another game
+    Bug: New stories doubled
+    Fix: story_template.py StoryHandler.create_story() clear down story list
+
+I08 Input start another game - from win
 
 a. Ensure input prompt is clearly understandable
 
@@ -158,4 +164,6 @@ d. Check for availability of the quit option
 e. Check that the logic flows correctly from the inputs
 
 ### Random Branch Point Tests
+    See: I05
+
 ### Playability Tests
