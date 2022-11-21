@@ -112,8 +112,9 @@ def sentence_loop(num_paragraphs, player_level, start_num_fairies,
             paragraph_count += 1
         # Get and check user corrections
         word_loop_ret = word_loop(fairy_count)
-        failed = word_loop_ret.failed
-        fairy_count = word_loop_ret.fairy_count
+        failed = word_loop_ret["failed"]
+        fairy_count = word_loop_ret["fairy_count"]
+        print("Failed:", failed, "fairy_count:", fairy_count)
 
         if (paragraph_end and not failed):
             # Print the consequence
@@ -185,8 +186,11 @@ def word_loop(fairy_count):
                     try_again = False
                     failed = False
             else:
+                print("Got Here")
                 story.print_ill_consequence()
                 try_again = False
+        else:
+            try_again = False
 
     return {"failed": failed, "fairy_count": fairy_count}
 

@@ -14,7 +14,7 @@ A command-line adventure/memory game for a solo player.
     </li>
 </ul>
 
-## System Test
+## Systems Tests
 ### Game Start Texts
 
 * Introduction Text
@@ -94,6 +94,8 @@ e. Check that the logic flows correctly from the inputs
     Correct Answer
 
         General
+            Bug: word_loop() while condition not cancelled
+            Fix: inserted else and reset flag
 
         End of Paragraph
 
@@ -101,10 +103,13 @@ e. Check that the logic flows correctly from the inputs
 
     Incorrect Answer
 
-        Bug: word_loop() fairy-count not found
-        Fix: pass and return the fairy_count variable from the calling function
-        Bug: word_loop() math.random() does not exist
-        Fix: use random.random()
+        * Another Chance
+            Bug: word_loop() fairy-count not found
+            Fix: pass and return the fairy_count variable from the calling function
+            Bug: word_loop() math.random() does not exist
+            Fix: use random.random()
+            Bug: sentence_loop() invalid use of . notation for dict reference
+            Fix: used bracketed notation ["xx"]
 
 I06 Input repeat same game
 
