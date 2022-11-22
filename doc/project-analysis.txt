@@ -101,7 +101,7 @@
 	Schedule						Completion		Actual		Actual Time (1/2 days)
 	Data and Logic Analysis			20/11/22		19/11/22          4
 	External Work					26/11/22
-	Coding							30/11/22
+	Coding							30/11/22		21/11/22		  7
 	Systems Testing					02/12/22
 	Readme							04/12/22
 	Submission						08/01/23
