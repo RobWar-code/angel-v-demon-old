@@ -19,7 +19,11 @@ A command-line adventure/memory game for a solo player.
 
 * Introduction Text
 
+![Introduction Text](/doc/readme-images/introduction-crop.png "Introduction Text")
+
 * Instruction Text
+
+![Instructions Text](/doc/readme-images/instructions-crop.png "Instructions Text")
 
 ### Input Point Tests
 All input tests are performed on game 1 paragraph, player level 1.
