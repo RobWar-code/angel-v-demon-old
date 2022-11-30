@@ -1,5 +1,8 @@
 Contents
     Work Due
+
+        Transfer this project to the new Heroku ready gitpod template angel-v-demon
+        
     Work Done
 
 Work Due
